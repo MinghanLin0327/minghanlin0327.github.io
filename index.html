@@ -15,7 +15,6 @@
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
 
   body {
@@ -224,6 +223,62 @@
     background: var(--cyan);
     box-shadow: 0 0 12px var(--cyan);
     z-index: 999;
+  }
+
+  /* ===== 个人简介（含照片） ===== */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .about-text p {
+    color: var(--muted);
+    font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 24px;
+  }
+
+  .about-text p strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .about-photo-wrapper {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    /* 调整了长宽比，让它看起来像一张宽幅电影海报 */
+    aspect-ratio: 16 / 10; 
+    border: 1px solid rgba(255,255,255,0.08);
+    margin-top: 20px;
+  }
+
+  /* 核心：给照片加上琉雀式的青色科幻滤镜 */
+  .about-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* 稍微偏上一点，保证人物完整 */
+    object-position: center 40%;
+    filter: grayscale(80%) sepia(100%) hue-rotate(140deg) saturate(300%) contrast(1.1) brightness(0.7);
+    transition: filter 0.8s ease, transform 0.8s ease;
+  }
+
+  /* hover 的时候恢复一点真实色彩并轻微放大 */
+  .about-photo-wrapper:hover .about-photo {
+    filter: grayscale(20%) sepia(20%) hue-rotate(160deg) saturate(150%) contrast(1) brightness(0.9);
+    transform: scale(1.03);
+  }
+
+  /* 照片底部的扫描线遮罩渐隐 */
+  .about-photo-wrapper::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 60%, var(--bg) 100%);
+    pointer-events: none;
   }
 
   /* ===== 教育 ===== */
@@ -474,6 +529,10 @@
   }
 
   /* ===== 响应式 ===== */
+  @media (max-width: 800px) {
+    .about-photo-wrapper { aspect-ratio: 4 / 3; }
+  }
+
   @media (max-width: 640px) {
     .section { padding: 100px 20px; }
     .edu-card, .exp-header { flex-direction: column; gap: 12px; }
@@ -505,6 +564,25 @@
   </div>
 </section>
 
+<!-- ABOUT / PROFILE -->
+<section class="section" id="about">
+  <p class="section-label reveal">00 — Profile</p>
+  <h2 class="section-title reveal">Beyond the<br>Microscope</h2>
+  
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>Hi, I'm Minghan (Michael). I'm a Materials Science and Engineering student at <strong>Imperial College London</strong>, fascinated by the intersection of atomic-scale precision and real-world engineering.</p>
+      <p>From operating Bruker AFMs to designing components for a robocasting printer, I enjoy the process of <strong>exploring the unknown</strong>, breaking down complex problems, and building solutions from the ground up.</p>
+      <p>Outside the lab, you'll find me exploring coastlines, chasing good views, and staying curious.</p>
+    </div>
+    
+    <div class="about-photo-wrapper reveal">
+      <!-- 照片路径已更新，并且调成了更合适的宽幅比例 -->
+      <img src="image/lmh.jpg" alt="Minghan Lin exploring the coast" class="about-photo">
+    </div>
+  </div>
+</section>
+
 <!-- EDUCATION -->
 <section class="section" id="education">
   <p class="section-label reveal">01 — Education</p>
@@ -521,27 +599,10 @@
   </div>
 </section>
 
-<!-- EXPERIENCE -->
+<!-- EXPERIENCE (Tao Institute 在前) -->
 <section class="section" id="experience">
   <p class="section-label reveal">02 — Experience</p>
   <h2 class="section-title reveal">Where I've<br>Applied It</h2>
-
-  <div class="exp-item reveal">
-    <div class="exp-header">
-      <div>
-        <div class="exp-role">Semiconductor Wafer Manufacture Intern</div>
-        <div class="exp-company">Qingdao iStar Wafer Technology</div>
-      </div>
-      <div class="exp-date">Jun 2025 – Jul 2025 · Qingdao, China</div>
-    </div>
-    <p class="exp-desc">
-      Conducted literature reviews on <strong>sapphire, InP, and Ga₂O₃</strong> fabrication technologies, material properties, and emerging industry trends. Gained exposure to industrial-scale wafer fabrication — ingot slicing, lapping, polishing, cleaning.
-    </p>
-    <button class="exp-toggle" onclick="toggleDetail(this)">Expand Detail</button>
-    <div class="exp-detail">
-      <p>Founded in 2011, the company specializes in the research, development, and manufacturing of semiconductor substrate wafers, serving integrated circuits, optoelectronics, power electronics, and advanced communications. Organized findings into concise technical summaries for engineering and management teams, and reviewed engineering documentation through plant walkthroughs.</p>
-    </div>
-  </div>
 
   <div class="exp-item reveal">
     <div class="exp-header">
@@ -557,6 +618,23 @@
     <button class="exp-toggle" onclick="toggleDetail(this)">Expand Detail</button>
     <div class="exp-detail">
       <p>Trained in sample preparation (extraction of nanoparticles from solid-liquid phase interface), AFM instrument setup and calibration (laser intensity and focus adjustment), and nanoscale surface characterization. Processed raw data using Gwyddion and Nanoscope Analysis, converting images into 3D surface roughness visualizations. Correlated surface roughness with sample preparation conditions to help the lab plan subsequent experiments.</p>
+    </div>
+  </div>
+
+  <div class="exp-item reveal">
+    <div class="exp-header">
+      <div>
+        <div class="exp-role">Semiconductor Wafer Manufacture Intern</div>
+        <div class="exp-company">Qingdao iStar Wafer Technology</div>
+      </div>
+      <div class="exp-date">Jun 2025 – Jul 2025 · Qingdao, China</div>
+    </div>
+    <p class="exp-desc">
+      Conducted literature reviews on <strong>sapphire, InP, and Ga₂O₃</strong> fabrication technologies, material properties, and emerging industry trends. Gained exposure to industrial-scale wafer fabrication — ingot slicing, lapping, polishing, cleaning.
+    </p>
+    <button class="exp-toggle" onclick="toggleDetail(this)">Expand Detail</button>
+    <div class="exp-detail">
+      <p>Founded in 2011, the company specializes in the research, development, and manufacturing of semiconductor substrate wafers, serving integrated circuits, optoelectronics, power electronics, and advanced communications. Organized findings into concise technical summaries for engineering and management teams, and reviewed engineering documentation through plant walkthroughs.</p>
     </div>
   </div>
 </section>
@@ -637,7 +715,6 @@
 <script>
   gsap.registerPlugin(ScrollTrigger);
 
-  // 通用入场：每个带 .reveal 的元素滚动进入时淡入上移
   document.querySelectorAll('.reveal').forEach((el) => {
     gsap.from(el, {
       y: 40,
@@ -652,7 +729,6 @@
     });
   });
 
-  // 项目卡片轻微弹性，呼应"二段跳"但保持克制
   document.querySelectorAll('.project-card').forEach((card) => {
     gsap.from(card, {
       y: 60,
@@ -668,7 +744,6 @@
     });
   });
 
-  // 顶部滚动进度能量条
   const progressBar = document.getElementById('progressBar');
   window.addEventListener('scroll', () => {
     const scrollTop = window.scrollY;
@@ -677,7 +752,6 @@
     progressBar.style.width = progress + '%';
   });
 
-  // 展开/收起工作详情
   function toggleDetail(btn) {
     const detail = btn.nextElementSibling;
     const isOpen = detail.classList.contains('open');
