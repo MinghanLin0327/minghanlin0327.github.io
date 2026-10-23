@@ -378,6 +378,21 @@
   .edu-meta { text-align: right; color: var(--muted); font-size: 14px; line-height: 1.8; }
   .edu-meta .year { color: var(--cyan); font-weight: 600; }
 
+  /* 新增：相关课程样式 */
+  .edu-coursework {
+    margin-top: 24px;
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.8;
+    width: 100%;
+  }
+  .edu-coursework span {
+    color: var(--cyan);
+    font-weight: 500;
+    margin-right: 8px;
+    letter-spacing: 0.05em;
+  }
+
   /* ===== 工作经历 ===== */
   .exp-item { padding: 48px 0; border-top: 1px solid rgba(255,255,255,0.08); }
   .exp-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: wrap; margin-bottom: 20px; }
@@ -546,7 +561,6 @@
   <h2 class="section-title reveal">About</h2>
   
   <div class="about-grid">
-    <!-- 圆形小头像，原图无滤镜，左侧布局 -->
     <div class="about-photo-wrapper reveal">
       <img src="image/lmh.jpg" alt="Minghan Lin" class="about-photo">
     </div>
@@ -561,11 +575,17 @@
 <!-- EDUCATION -->
 <section class="section" id="education">
   <p class="section-label reveal">01 — Education</p>
-  <h2 class="section-title reveal">Academic<br>Foundation</h2>
+  <h2 class="section-title reveal">Education</h2>
   <div class="edu-card reveal">
     <div>
       <div class="edu-school">Imperial College London</div>
       <div class="edu-degree">Bachelor of Engineering · Materials Science and Engineering</div>
+      
+      <!-- 这里加入了相关课程 -->
+      <div class="edu-coursework">
+        <span>Relevant Coursework:</span>
+        Materials Characterisation · Engineering Practice I · Performance of Structural Materials · Structure II · Properties II
+      </div>
     </div>
     <div class="edu-meta">
       London, UK<br>
@@ -574,10 +594,10 @@
   </div>
 </section>
 
-<!-- EXPERIENCE (时间挪到公司下方) -->
+<!-- EXPERIENCE -->
 <section class="section" id="experience">
   <p class="section-label reveal">02 — Experience</p>
-  <h2 class="section-title reveal">Where I've<br>Applied It</h2>
+  <h2 class="section-title reveal">Experience</h2>
 
   <div class="exp-item reveal">
     <div class="exp-header">
@@ -617,7 +637,7 @@
 <!-- PROJECTS -->
 <section class="section" id="projects">
   <p class="section-label reveal">03 — Projects</p>
-  <h2 class="section-title reveal">Built &<br>Analyzed</h2>
+  <h2 class="section-title reveal">Projects</h2>
 
   <div class="project-grid">
     <div class="project-card reveal">
@@ -637,7 +657,7 @@
 <!-- SKILLS -->
 <section class="section" id="skills">
   <p class="section-label reveal">04 — Skills</p>
-  <h2 class="section-title reveal">Toolkit</h2>
+  <h2 class="section-title reveal">Skills</h2>
 
   <div class="skills-group reveal">
     <div class="skills-group-title">Characterization — Recon</div>
@@ -815,8 +835,8 @@
     if (q.match(/semiconductor|wafer|istar|qingdao|sapphire/)) {
       return "He was a Semiconductor Wafer Manufacture Intern at <strong>Qingdao iStar</strong> (Jun-Jul 2025). He conducted literature reviews on sapphire, InP, and Ga₂O₃ fabrication technologies, and got hands-on exposure to industrial-scale wafer fabrication.";
     }
-    if (q.match(/school|education|imperial|university|degree/)) {
-      return "He is studying <strong>Materials Science and Engineering</strong> at <strong>Imperial College London</strong>, expected to graduate in June 2027 with a BEng.";
+    if (q.match(/school|education|imperial|university|degree|course/)) {
+      return "He is studying <strong>Materials Science and Engineering</strong> at <strong>Imperial College London</strong>, expected to graduate in June 2027. His relevant coursework includes Materials Characterisation, Engineering Practice I, and Performance of Structural Materials.";
     }
     if (q.match(/project|robocast|printer|rice cooker/)) {
       return "He has two major projects: <br>1. <strong>Robocasting Printer</strong>: Designed 5+ components in SolidWorks and assembled the printing system.<br>2. <strong>Rice Cooker Teardown</strong>: Characterized 10+ components (XRD, SEM, FTIR, etc.) and proposed a cost-saving design.";
