@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Minghan Lin — Materials Science & Engineering</title>
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --text: #f5f5f7;
+    --muted: #86868b;
+    --cyan: #00e5ff;
+    --cyan-dim: rgba(0, 229, 255, 0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 0 24px;
+  }
+
+  /* 琉雀式能量光弧：从名字下方划过 */
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: 52%;
+    left: -10%;
+    width: 120%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    opacity: 0.6;
+    transform: rotate(-4deg);
+    animation: scanline 6s ease-in-out infinite;
+  }
+
+  @keyframes scanline {
+    0%, 100% { transform: rotate(-4deg) translateX(-30%); opacity: 0; }
+    50% { transform: rotate(-4deg) translateX(30%); opacity: 0.8; }
+  }
+
+  /* 侦察脉冲点 */
+  .pulse-dot {
+    position: absolute;
+    top: 18%;
+    right: 12%;
+    width: 10px;
+    height: 10px;
+    background: var(--cyan);
+    border-radius: 50%;
+    box-shadow: 0 0 20px var(--cyan);
+    animation: pulse 3s ease-in-out infinite;
+  }
+
+  .pulse-dot::after {
+    content: "";
+    position: absolute;
+    inset: -10px;
+    border: 1px solid var(--cyan);
+    border-radius: 50%;
+    opacity: 0;
+    animation: ring 3s ease-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.4; transform: scale(0.9); }
+    50% { opacity: 1; transform: scale(1.1); }
+  }
+
+  @keyframes ring {
+    0% { transform: scale(0.5); opacity: 0.8; }
+    100% { transform: scale(3); opacity: 0; }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 900px;
+  }
+
+  .eyebrow {
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.2s forwards;
+  }
+
+  .hero h1 {
+    font-size: clamp(48px, 9vw, 120px);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.4s forwards;
+  }
+
+  .hero h1 .accent {
+    color: var(--cyan);
+    text-shadow: 0 0 40px var(--cyan-dim);
+  }
+
+  .hero-sub {
+    margin-top: 28px;
+    font-size: clamp(16px, 1.8vw, 20px);
+    color: var(--muted);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.6s forwards;
+  }
+
+  .hero-tags {
+    margin-top: 36px;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.8s forwards;
+  }
+
+  .tag {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 999px;
+    color: var(--muted);
+    transition: all 0.3s ease;
+  }
+
+  .tag:hover {
+    border-color: var(--cyan);
+    color: var(--cyan);
+    box-shadow: 0 0 20px var(--cyan-dim);
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.2s forwards;
+  }
+
+  .scroll-hint .line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--cyan), transparent);
+    animation: drop 2s ease-in-out infinite;
+  }
+
+  @keyframes drop {
+    0%, 100% { transform: scaleY(0.3); opacity: 0.3; transform-origin: top; }
+    50% { transform: scaleY(1); opacity: 1; transform-origin: top; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* 第二屏占位，用来验证滚动 */
+  .next-section {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="pulse-dot"></div>
+    <div class="hero-content">
+      <p class="eyebrow">Materials Science & Engineering</p>
+      <h1>Minghan<br><span class="accent">Lin</span></h1>
+      <p class="hero-sub">Imperial College London · Precision at the nanoscale</p>
+      <div class="hero-tags">
+        <span class="tag">AFM</span>
+        <span class="tag">Semiconductor</span>
+        <span class="tag">SolidWorks</span>
+        <span class="tag">Python</span>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="line"></div>
+    </div>
+  </section>
+
+  <section class="next-section">
+    <p>Education & Experience — 下一步在这里展开</p>
+  </section>
+
+</body>
+</html>
