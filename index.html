@@ -324,33 +324,35 @@
     z-index: 1001;
   }
 
-  /* ===== About（原图、放左边） ===== */
+  /* ===== About 板块（圆形小头像 + 右侧文字） ===== */
   .about-grid {
     display: grid;
-    grid-template-columns: 280px 1fr; /* 左侧照片固定宽度，右侧文字自适应 */
+    grid-template-columns: 200px 1fr; /* 左侧头像宽度固定，右侧自适应 */
     gap: 48px;
-    align-items: center;
+    align-items: center; /* 垂直居中对齐 */
   }
 
   .about-photo-wrapper {
     position: relative;
-    border-radius: 16px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%; /* 变成圆形 */
     overflow: hidden;
-    aspect-ratio: 4 / 5; /* 恢复稍微竖一点的比例，配合小图 */
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    /* 给圆形头像加一点点微弱的发光，契合整体色调 */
+    box-shadow: 0 0 30px rgba(0, 229, 255, 0.05); 
   }
 
   .about-photo {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
-    /* 去掉诡异滤镜，保留原图，加一点点极轻微的亮度过渡 */
-    transition: transform 0.6s ease;
+    object-position: center 30%; /* 稍微偏上，确保人物脸部和手势在圆内 */
+    transition: transform 0.6s ease, border-color 0.6s ease;
   }
 
   .about-photo-wrapper:hover .about-photo {
-    transform: scale(1.05);
+    transform: scale(1.08); /* hover时轻微放大 */
   }
 
   .about-text p {
@@ -382,7 +384,7 @@
   .exp-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: wrap; margin-bottom: 20px; }
   .exp-role { font-size: clamp(22px, 2.6vw, 32px); font-weight: 600; letter-spacing: -0.02em; margin-bottom: 8px; }
   .exp-company { color: var(--text); font-size: 18px; font-weight: 500; }
-  .exp-date { color: var(--muted); font-size: 14px; margin-top: 6px; display: block; } /* 时间放到公司下面 */
+  .exp-date { color: var(--muted); font-size: 14px; margin-top: 6px; display: block; } 
   
   .exp-desc { color: var(--muted); font-size: 16px; line-height: 1.8; max-width: 760px; }
   .exp-desc strong { color: var(--text); font-weight: 500; }
@@ -473,8 +475,12 @@
 
   /* ===== 响应式 ===== */
   @media (max-width: 800px) {
-    .about-grid { grid-template-columns: 1fr; }
-    .about-photo-wrapper { max-width: 280px; margin: 0 auto; }
+    .about-grid { 
+      grid-template-columns: 1fr; 
+      justify-items: center; 
+      text-align: center; 
+    }
+    .about-photo-wrapper { margin-bottom: 24px; }
     .nav-links { gap: 16px; font-size: 11px; }
     .bot-container { bottom: 20px; right: 20px; }
     .bot-panel { width: calc(100vw - 40px); right: -10px; height: 60vh; }
@@ -512,8 +518,8 @@
     
     <!-- 社交图标 -->
     <div class="hero-socials">
-      <!-- 替换为他的真实 LinkedIn 链接 -->
-      <a href="https://www.linkedin.com/in/minghan-lin" target="_blank" title="LinkedIn">
+      <!-- 领英链接已更正 -->
+      <a href="https://www.linkedin.com/in/minghan-lin-62a950390/" target="_blank" title="LinkedIn">
         <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
       </a>
       <a href="mailto:michaelminghanlin@gmail.com" title="Email">
@@ -542,7 +548,7 @@
   <h2 class="section-title reveal">About</h2>
   
   <div class="about-grid">
-    <!-- 照片放左侧，去掉滤镜，尺寸缩小 -->
+    <!-- 圆形小头像，原图无滤镜，左侧布局 -->
     <div class="about-photo-wrapper reveal">
       <img src="image/lmh.jpg" alt="Minghan Lin" class="about-photo">
     </div>
@@ -571,7 +577,7 @@
   </div>
 </section>
 
-<!-- EXPERIENCE (时间已挪到公司下方) -->
+<!-- EXPERIENCE (时间挪到公司下方) -->
 <section class="section" id="experience">
   <p class="section-label reveal">02 — Experience</p>
   <h2 class="section-title reveal">Where I've<br>Applied It</h2>
